@@ -1,0 +1,22 @@
+Generated a 8 x 8 matrix.
+
+First 5 rows of A:
+5.26053	0.840188	0.394383	0.783099	0.79844	
+0.277775	4.76843	0.55397	0.477397	0.628871	
+0.635712	0.717297	3.498	0.141603	0.606969	
+0.156679	0.400944	0.12979	3.52634	0.108809	
+0.61264	0.296032	0.637552	0.524287	4.82939	
+
+First 5 entries of b:
+0.76823
+0.916195
+0.804177
+0.839112
+0.771358
+
+Checking diagonal dominance for first 5 rows:
+Row 0: |A[i][i]| = 5.26053, sum(off-diagonal) = 4.26053  --> OK
+Row 1: |A[i][i]| = 4.76843, sum(off-diagonal) = 3.76843  --> OK
+Row 2: |A[i][i]| = 3.498, sum(off-diagonal) = 2.498  --> OK
+Row 3: |A[i][i]| = 3.52634, sum(off-diagonal) = 2.52634  --> OK
+Row 4: |A[i][i]| = 4.82939, sum(off-diagonal) = 3.82939  --> OK
