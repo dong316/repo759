@@ -1,0 +1,7 @@
+Jacobi serial solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Iterations used = 1765
+Final error = 9.95349e-07
+Runtime (s) = 0.107078
