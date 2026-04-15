@@ -1,1 +1,0 @@
-This project implements a serial and OpenMP parallel Jacobi solver for linear systems Ax = b.
