@@ -1,24 +1,31 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <cstdlib>
 #include "matrix_utils.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        cout << "Usage: ./test_matrix N" << endl;
+        cout << "Usage: ./test_matrix N [seed]" << endl;
         return 1;
     }
 
     int N = atoi(argv[1]);
+    unsigned int seed = 42;
+
+    if (argc >= 3) {
+        seed = (unsigned int) atoi(argv[2]);
+    }
 
     vector<vector<double>> A(N, vector<double>(N));
     vector<double> b(N);
 
-    generate_diagonally_dominant_system(A, b, N);
+    generate_diagonally_dominant_system(A, b, N, seed);
 
     cout << "Generated a " << N << " x " << N << " matrix." << endl;
+    cout << "Seed = " << seed << endl;
 
     int rows_to_print = (N < 5) ? N : 5;
 

@@ -7,8 +7,11 @@ using namespace std;
 void generate_diagonally_dominant_system(
     vector<vector<double>> &A,
     vector<double> &b,
-    int N
+    int N,
+    unsigned int seed
 ) {
+    srand(seed);
+
     for (int i = 0; i < N; i++) {
         double row_sum = 0.0;
 

@@ -6,7 +6,8 @@
 void generate_diagonally_dominant_system(
     std::vector<std::vector<double>> &A,
     std::vector<double> &b,
-    int N
+    int N,
+    unsigned int seed
 );
 
 #endif

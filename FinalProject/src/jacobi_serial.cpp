@@ -9,13 +9,14 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        cout << "Usage: ./jacobi_serial N [max_iter] [tol]" << endl;
+        cout << "Usage: ./jacobi_serial N [max_iter] [tol] [seed]" << endl;
         return 1;
     }
 
     int N = atoi(argv[1]);
     int max_iter = 10000;
     double tol = 1e-6;
+    unsigned int seed = 42;
 
     if (argc >= 3) {
         max_iter = atoi(argv[2]);
@@ -23,13 +24,16 @@ int main(int argc, char* argv[]) {
     if (argc >= 4) {
         tol = atof(argv[3]);
     }
+    if (argc >= 5) {
+        seed = (unsigned int) atoi(argv[4]);
+    }
 
     vector<vector<double>> A(N, vector<double>(N));
     vector<double> b(N);
     vector<double> x(N, 0.0);
     vector<double> x_new(N, 0.0);
 
-    generate_diagonally_dominant_system(A, b, N);
+    generate_diagonally_dominant_system(A, b, N, seed);
 
     auto start = chrono::high_resolution_clock::now();
 
@@ -67,6 +71,7 @@ int main(int argc, char* argv[]) {
     cout << "N = " << N << endl;
     cout << "Max iterations = " << max_iter << endl;
     cout << "Tolerance = " << tol << endl;
+    cout << "Seed = " << seed << endl;
     cout << "Iterations used = " << iter + 1 << endl;
     cout << "Final error = " << err << endl;
     cout << "Runtime (s) = " << runtime << endl;
