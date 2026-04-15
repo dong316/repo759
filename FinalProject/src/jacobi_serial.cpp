@@ -76,5 +76,9 @@ int main(int argc, char* argv[]) {
     cout << "Final error = " << err << endl;
     cout << "Runtime (s) = " << runtime << endl;
 
+    ofstream file("results/runtime.csv", ios::app);
+    file << "serial," << N << "," << iter+1 << "," << runtime << endl;
+    file.close();
+
     return 0;
 }
