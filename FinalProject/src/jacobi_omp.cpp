@@ -44,8 +44,7 @@ int main(int argc, char* argv[]) {
 
     for (iter = 0; iter < max_iter; iter++) {
 
-        // parallelize outer loop
-        #pragma omp parallel for
+        #pragma omp parallel for schedule(static)
         for (int i = 0; i < N; i++) {
             double sigma = 0.0;
 
@@ -60,14 +59,12 @@ int main(int argc, char* argv[]) {
 
         err = 0.0;
 
-        // reduction for error
-        #pragma omp parallel for reduction(+:err)
+        #pragma omp parallel for reduction(+:err) schedule(static)
         for (int i = 0; i < N; i++) {
             err += fabs(x_new[i] - x[i]);
         }
 
-        // update x
-        #pragma omp parallel for
+        #pragma omp parallel for schedule(static)
         for (int i = 0; i < N; i++) {
             x[i] = x_new[i];
         }
@@ -80,18 +77,20 @@ int main(int argc, char* argv[]) {
     auto end = chrono::high_resolution_clock::now();
     double runtime = chrono::duration<double>(end - start).count();
 
+    int threads = omp_get_max_threads();
+
     cout << "Jacobi OpenMP solver finished" << endl;
     cout << "N = " << N << endl;
     cout << "Max iterations = " << max_iter << endl;
     cout << "Tolerance = " << tol << endl;
     cout << "Seed = " << seed << endl;
-    cout << "Threads = " << omp_get_max_threads() << endl;
+    cout << "Threads = " << threads << endl;
     cout << "Iterations used = " << iter + 1 << endl;
     cout << "Final error = " << err << endl;
     cout << "Runtime (s) = " << runtime << endl;
 
-    ofstream file("results/runtime.csv", ios::app);
-    file << "omp," << N << "," << iter + 1 << "," << runtime << endl;
+    ofstream file("results/runtime_omp.csv", ios::app);
+    file << "omp," << threads << "," << N << "," << iter + 1 << "," << runtime << endl;
     file.close();
 
     return 0;
