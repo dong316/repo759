@@ -3,6 +3,7 @@
 #include <cmath>
 #include <chrono>
 #include <cstdlib>
+#include <fstream>
 #include "matrix_utils.h"
 
 using namespace std;
