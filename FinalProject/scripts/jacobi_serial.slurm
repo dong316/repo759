@@ -6,10 +6,16 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=00:05:00
+#SBATCH --time=00:20:00
 
 mkdir -p results
 
 g++ -O2 src/jacobi_serial.cpp src/matrix_utils.cpp -o jacobi_serial
 
-./jacobi_serial 256 10000 1e-6
+for N in 256 512 1024 2048 4096 8192
+do
+    for i in 1 2 3
+    do
+        ./jacobi_serial $N
+    done
+done

@@ -1,0 +1,120 @@
+Jacobi serial solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.189999
+Jacobi serial solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.189808
+Jacobi serial solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.190368
+Jacobi serial solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 1.60423
+Jacobi serial solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 1.60092
+Jacobi serial solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 1.60204
+Jacobi serial solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 13.1751
+Jacobi serial solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 13.152
+Jacobi serial solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 13.1418
+Jacobi serial solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 75.6216
+Jacobi serial solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 76.0526
+Jacobi serial solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 75.5523
+Jacobi serial solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 306.353
+Jacobi serial solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 305.439
+Jacobi serial solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 307.907

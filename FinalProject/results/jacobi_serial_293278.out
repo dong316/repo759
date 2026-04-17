@@ -1,0 +1,88 @@
+Jacobi serial solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.193243
+Jacobi serial solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.192724
+Jacobi serial solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.192643
+Jacobi serial solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 1.62717
+Jacobi serial solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 1.61335
+Jacobi serial solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 1.61864
+Jacobi serial solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 13.3148
+Jacobi serial solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 13.3369
+Jacobi serial solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 13.3306
+Jacobi serial solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 76.8424
+Jacobi serial solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 76.4583
