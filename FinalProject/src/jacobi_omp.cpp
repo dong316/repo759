@@ -79,6 +79,17 @@ int main(int argc, char* argv[]) {
 
     int threads = omp_get_max_threads();
 
+    double residual = 0.0;
+    for (int i = 0; i < N; i++) {
+        double ax_i = 0.0;
+        for (int j = 0; j < N; j++) {
+            ax_i += A[i][j] * x[j];
+        }
+        residual += fabs(ax_i - b[i]);
+    }
+
+    cout << "Residual L1 = " << residual << endl;
+
     cout << "Jacobi OpenMP solver finished" << endl;
     cout << "N = " << N << endl;
     cout << "Max iterations = " << max_iter << endl;

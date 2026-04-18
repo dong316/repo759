@@ -68,6 +68,17 @@ int main(int argc, char* argv[]) {
     auto end = chrono::high_resolution_clock::now();
     double runtime = chrono::duration<double>(end - start).count();
 
+    double residual = 0.0;
+    for (int i = 0; i < N; i++) {
+        double ax_i = 0.0;
+        for (int j = 0; j < N; j++) {
+            ax_i += A[i][j] * x[j];
+        }
+        residual += fabs(ax_i - b[i]);
+    }
+
+    cout << "Residual L1 = " << residual << endl;
+
     cout << "Jacobi serial solver finished" << endl;
     cout << "N = " << N << endl;
     cout << "Max iterations = " << max_iter << endl;
