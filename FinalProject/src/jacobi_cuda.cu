@@ -4,7 +4,6 @@
 #include <chrono>
 #include <cstdlib>
 #include <fstream>
-#include <iomanip>
 #include <cuda_runtime.h>
 #include "matrix_utils.h"
 
@@ -20,13 +19,13 @@ using namespace std;
         }                                                                    \
     } while (0)
 
-__global__ void jacobi_step_kernel(const double* A,
-                                   const double* b,
-                                   const double* x,
-                                   double* x_new,
-                                   double* err,
-                                   int N) {
+__global__ void jacobi_update_kernel(const double* A,
+                                     const double* b,
+                                     const double* x,
+                                     double* x_new,
+                                     int N) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
+
     if (i < N) {
         double sigma = 0.0;
         for (int j = 0; j < N; j++) {
@@ -34,18 +33,7 @@ __global__ void jacobi_step_kernel(const double* A,
                 sigma += A[i * N + j] * x[j];
             }
         }
-
-        double new_val = (b[i] - sigma) / A[i * N + i];
-        x_new[i] = new_val;
-
-        atomicAdd(err, fabs(new_val - x[i]));
-    }
-}
-
-__global__ void copy_kernel(double* x, const double* x_new, int N) {
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-    if (i < N) {
-        x[i] = x_new[i];
+        x_new[i] = (b[i] - sigma) / A[i * N + i];
     }
 }
 
@@ -60,22 +48,16 @@ int main(int argc, char* argv[]) {
     double tol = 1e-6;
     unsigned int seed = 42;
 
-    if (argc >= 3) {
-        max_iter = atoi(argv[2]);
-    }
-    if (argc >= 4) {
-        tol = atof(argv[3]);
-    }
-    if (argc >= 5) {
-        seed = (unsigned int) atoi(argv[4]);
-    }
+    if (argc >= 3) max_iter = atoi(argv[2]);
+    if (argc >= 4) tol = atof(argv[3]);
+    if (argc >= 5) seed = (unsigned int) atoi(argv[4]);
 
-    // Host-side original system (reuse existing generator)
+    // Generate the same system as serial/OMP
     vector<vector<double>> A_2d(N, vector<double>(N));
     vector<double> b(N);
     generate_diagonally_dominant_system(A_2d, b, N, seed);
 
-    // Flatten A for GPU
+    // Flatten A for CUDA
     vector<double> A_flat(N * N);
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -83,15 +65,12 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    vector<double> x_host(N, 0.0);
-    vector<double> x_new_host(N, 0.0);
+    // Host vectors
+    vector<double> x(N, 0.0);
+    vector<double> x_new(N, 0.0);
 
-    // Device memory
-    double* d_A = nullptr;
-    double* d_b = nullptr;
-    double* d_x = nullptr;
-    double* d_x_new = nullptr;
-    double* d_err = nullptr;
+    // Device pointers
+    double *d_A = nullptr, *d_b = nullptr, *d_x = nullptr, *d_x_new = nullptr;
 
     size_t matrix_bytes = (size_t)N * (size_t)N * sizeof(double);
     size_t vector_bytes = (size_t)N * sizeof(double);
@@ -100,12 +79,10 @@ int main(int argc, char* argv[]) {
     CUDA_CHECK(cudaMalloc((void**)&d_b, vector_bytes));
     CUDA_CHECK(cudaMalloc((void**)&d_x, vector_bytes));
     CUDA_CHECK(cudaMalloc((void**)&d_x_new, vector_bytes));
-    CUDA_CHECK(cudaMalloc((void**)&d_err, sizeof(double)));
 
     CUDA_CHECK(cudaMemcpy(d_A, A_flat.data(), matrix_bytes, cudaMemcpyHostToDevice));
     CUDA_CHECK(cudaMemcpy(d_b, b.data(), vector_bytes, cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(d_x, x_host.data(), vector_bytes, cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(d_x_new, x_new_host.data(), vector_bytes, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(d_x, x.data(), vector_bytes, cudaMemcpyHostToDevice));
 
     int threads_per_block = 256;
     int blocks = (N + threads_per_block - 1) / threads_per_block;
@@ -116,40 +93,41 @@ int main(int argc, char* argv[]) {
     auto start = chrono::high_resolution_clock::now();
 
     for (iter = 0; iter < max_iter; iter++) {
+        jacobi_update_kernel<<<blocks, threads_per_block>>>(d_A, d_b, d_x, d_x_new, N);
+        CUDA_CHECK(cudaGetLastError());
+        CUDA_CHECK(cudaDeviceSynchronize());
+
+        // Copy new iterate back to host
+        CUDA_CHECK(cudaMemcpy(x_new.data(), d_x_new, vector_bytes, cudaMemcpyDeviceToHost));
+
+        // Compute the same error as serial on host
         err = 0.0;
-        CUDA_CHECK(cudaMemcpy(d_err, &err, sizeof(double), cudaMemcpyHostToDevice));
+        for (int i = 0; i < N; i++) {
+            err += fabs(x_new[i] - x[i]);
+            x[i] = x_new[i];
+        }
 
-        jacobi_step_kernel<<<blocks, threads_per_block>>>(d_A, d_b, d_x, d_x_new, d_err, N);
-        CUDA_CHECK(cudaGetLastError());
-
-        copy_kernel<<<blocks, threads_per_block>>>(d_x, d_x_new, N);
-        CUDA_CHECK(cudaGetLastError());
-
-        CUDA_CHECK(cudaMemcpy(&err, d_err, sizeof(double), cudaMemcpyDeviceToHost));
+        // Copy updated x back to device for next iteration
+        CUDA_CHECK(cudaMemcpy(d_x, x.data(), vector_bytes, cudaMemcpyHostToDevice));
 
         if (err < tol) {
             break;
         }
     }
 
-    CUDA_CHECK(cudaDeviceSynchronize());
-
     auto end = chrono::high_resolution_clock::now();
     double runtime = chrono::duration<double>(end - start).count();
 
-    CUDA_CHECK(cudaMemcpy(x_host.data(), d_x, vector_bytes, cudaMemcpyDeviceToHost));
-
-    // Residual L1 = sum_i |(Ax)_i - b_i|
+    // Residual check on host
     double residual = 0.0;
     for (int i = 0; i < N; i++) {
         double ax_i = 0.0;
         for (int j = 0; j < N; j++) {
-            ax_i += A_flat[i * N + j] * x_host[j];
+            ax_i += A_flat[i * N + j] * x[j];
         }
         residual += fabs(ax_i - b[i]);
     }
 
-    cout << fixed << setprecision(6);
     cout << "Jacobi CUDA solver finished" << endl;
     cout << "N = " << N << endl;
     cout << "Max iterations = " << max_iter << endl;
@@ -168,7 +146,6 @@ int main(int argc, char* argv[]) {
     CUDA_CHECK(cudaFree(d_b));
     CUDA_CHECK(cudaFree(d_x));
     CUDA_CHECK(cudaFree(d_x_new));
-    CUDA_CHECK(cudaFree(d_err));
 
     return 0;
 }
