@@ -1,0 +1,28 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"cuda"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "cuda"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+/var/spool/slurmd/job343085/slurm_script: line 17: nvcc: command not found
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory
+/var/spool/slurmd/job343085/slurm_script: line 25: ./jacobi_cuda: No such file or directory

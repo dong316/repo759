@@ -1,0 +1,54 @@
+Jacobi OpenMP solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Threads = 4
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 79.2013
+Jacobi OpenMP solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Threads = 4
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 80.1845
+Jacobi OpenMP solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Threads = 4
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 79.0118
+Jacobi OpenMP solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Threads = 8
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 41.3569
+Jacobi OpenMP solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Threads = 8
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 41.4402
+Jacobi OpenMP solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Threads = 8
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 41.3691

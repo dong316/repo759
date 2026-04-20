@@ -1,0 +1,135 @@
+Jacobi CUDA solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.100517
+Residual L1 = 0.000127153
+Jacobi CUDA solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.07745
+Residual L1 = 0.000127153
+Jacobi CUDA solver finished
+N = 256
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 1761
+Final error = 9.97727e-07
+Runtime (s) = 0.0767459
+Residual L1 = 0.000127153
+Jacobi CUDA solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 0.266165
+Residual L1 = 0.000254576
+Jacobi CUDA solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 0.255993
+Residual L1 = 0.000254576
+Jacobi CUDA solver finished
+N = 512
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 3527
+Final error = 9.96797e-07
+Runtime (s) = 0.250093
+Residual L1 = 0.000254576
+Jacobi CUDA solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 0.928523
+Residual L1 = 0.000511364
+Jacobi CUDA solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 0.928267
+Residual L1 = 0.000511364
+Jacobi CUDA solver finished
+N = 1024
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 7077
+Final error = 9.99497e-07
+Runtime (s) = 0.930713
+Residual L1 = 0.000511364
+Jacobi CUDA solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 2.51278
+Residual L1 = 0.0585751
+Jacobi CUDA solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 2.51489
+Residual L1 = 0.0585751
+Jacobi CUDA solver finished
+N = 2048
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 5.72315e-05
+Runtime (s) = 2.5128
+Residual L1 = 0.0585751
+Jacobi CUDA solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 8.86193
+Residual L1 = 15.4349
+Jacobi CUDA solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 8.86399
+Residual L1 = 15.4349
+Jacobi CUDA solver finished
+N = 4096
+Max iterations = 10000
+Tolerance = 1e-06
+Seed = 42
+Iterations used = 10001
+Final error = 0.00754011
+Runtime (s) = 8.86408
+Residual L1 = 15.4349
