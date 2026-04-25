@@ -90,6 +90,11 @@ int main(int argc, char* argv[]) {
     int iter;
     double err = 0.0;
 
+    // warm-up kernel launch (not timed)
+    jacobi_update_kernel<<<blocks, threads_per_block>>>(d_A, d_b, d_x, d_x_new, N);
+    CUDA_CHECK(cudaGetLastError());
+    CUDA_CHECK(cudaDeviceSynchronize());
+
     auto start = chrono::high_resolution_clock::now();
 
     for (iter = 0; iter < max_iter; iter++) {

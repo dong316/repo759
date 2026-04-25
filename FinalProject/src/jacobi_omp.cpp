@@ -37,6 +37,21 @@ int main(int argc, char* argv[]) {
 
     generate_diagonally_dominant_system(A, b, N, seed);
 
+    // warm-up run (not timed)
+    #pragma omp parallel for schedule(static)
+    for (int i = 0; i < N; i++) {
+        double sigma = 0.0;
+
+        for (int j = 0; j < N; j++) {
+            if (j != i) {
+                sigma += A[i][j] * x[j];
+            }
+        }
+
+        x_new[i] = (b[i] - sigma) / A[i][i];
+    }
+
+
     auto start = chrono::high_resolution_clock::now();
 
     int iter;
