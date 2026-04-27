@@ -10,4 +10,10 @@ void generate_diagonally_dominant_system(
     unsigned int seed
 );
 
+void generate_stencil_system(
+    std::vector<std::vector<double>> &A,
+    std::vector<double> &b,
+    int N
+);
+
 #endif

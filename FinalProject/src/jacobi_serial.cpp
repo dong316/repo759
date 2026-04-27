@@ -34,8 +34,8 @@ int main(int argc, char* argv[]) {
     vector<double> x(N, 0.0);
     vector<double> x_new(N, 0.0);
 
-    generate_diagonally_dominant_system(A, b, N, seed);
-
+    //generate_diagonally_dominant_system(A, b, N, seed);
+    generate_stencil_system(A, b, N);
     // warm-up run (not timed)
     for (int i = 0; i < N; i++) {
         x[i] = 0.0;
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
     cout << "Final error = " << err << endl;
     cout << "Runtime (s) = " << runtime << endl;
 
-    ofstream file("results/runtime.csv", ios::app);
+    ofstream file("results/runtime_stencil.csv", ios::app);
     file << "serial," << N << "," << iter+1 << "," << runtime << endl;
     file.close();
 
