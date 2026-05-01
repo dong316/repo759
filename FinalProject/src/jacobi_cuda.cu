@@ -55,8 +55,8 @@ int main(int argc, char* argv[]) {
     // Generate the same system as serial/OMP
     vector<vector<double>> A_2d(N, vector<double>(N));
     vector<double> b(N);
-    generate_diagonally_dominant_system(A_2d, b, N, seed);
-
+    //generate_diagonally_dominant_system(A_2d, b, N, seed);
+    generate_stencil_system(A_2d, b, N);
     // Flatten A for CUDA
     vector<double> A_flat(N * N);
     for (int i = 0; i < N; i++) {
@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
     cout << "Runtime (s) = " << runtime << endl;
     cout << "Residual L1 = " << residual << endl;
 
-    ofstream file("results/runtime_cuda.csv", ios::app);
+    ofstream file("results/runtime_cuda_stencil.csv", ios::app);
     file << "cuda," << N << "," << iter + 1 << "," << runtime << endl;
     file.close();
 

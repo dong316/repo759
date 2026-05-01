@@ -35,8 +35,8 @@ int main(int argc, char* argv[]) {
     vector<double> x(N, 0.0);
     vector<double> x_new(N, 0.0);
 
-    generate_diagonally_dominant_system(A, b, N, seed);
-
+    //generate_diagonally_dominant_system(A, b, N, seed);
+    generate_stencil_system(A, b, N);
     // warm-up run (not timed)
     #pragma omp parallel for schedule(static)
     for (int i = 0; i < N; i++) {
@@ -115,7 +115,7 @@ int main(int argc, char* argv[]) {
     cout << "Final error = " << err << endl;
     cout << "Runtime (s) = " << runtime << endl;
 
-    ofstream file("results/runtime_omp.csv", ios::app);
+    ofstream file("results/runtime_omp_stencil.csv", ios::app);
     file << "omp," << threads << "," << N << "," << iter + 1 << "," << runtime << endl;
     file.close();
 
